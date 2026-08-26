@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c4pel0agx7igs"]
+
+[ext_resource type="Script" uid="uid://b2tg5krcc0v1y" path="res://src/screens/main.gd" id="1_ode7r"]
+[ext_resource type="PackedScene" uid="uid://bkpmuchmbfaol" path="res://src/sounds/sound_manager.tscn" id="2_fav7m"]
+[ext_resource type="PackedScene" uid="uid://cqe5dwrylo6gw" path="res://src/screens/menus/title.tscn" id="2_xgsyd"]
+
+[node name="Main" type="Control" unique_id=2065825284]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ode7r")
+
+[node name="Screen" type="Control" parent="." unique_id=808387656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="Screen" unique_id=1058211172 instance=ExtResource("2_xgsyd")]
+layout_mode = 1
+
+[node name="SoundManager" parent="." unique_id=1133291672 instance=ExtResource("2_fav7m")]

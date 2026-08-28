@@ -1,40 +1,99 @@
 extends Control
 
+signal pause
+signal play
+
 @onready var title_path = "res://src/screens/menus/title.tscn"
 @onready var pause_path = "res://src/screens/menus/pause.tscn"
-@onready var screen = $Screen
+@onready var game_path = "res://src/screens/game.tscn"
+
+@onready var screen: Control = $Screen
+@onready var camera: Camera2D = $Screen/Camera
+@onready var cam_canvas: CanvasLayer = $Screen/Camera/Canvas
 
 var paused : bool = false
+var restarting : bool = false
+
 
 func _ready() -> void:
 	get_window().min_size = Vector2(1280, 720)
 
 
-func use_name(node: Node, id: String) -> bool:
-	return node.name == id
-
-
 func check_state() -> void:
+	if screen.find_child("Title*", false, false) != null:
+		paused = false
+	
 	if paused:
-		screen.modulate = Color("646464ff")
-		screen.process_mode = Node.PROCESS_MODE_DISABLED
-		
-		if get_children().find_custom(use_name.bind("Pause")) == -1:
-			var pause : PackedScene = load(pause_path)
-			var menu = pause.instantiate()
-			add_child(menu)
+		pause.emit()
+		if cam_canvas.find_child("Pause*", false, false) == null:
+			var pause_scene : PackedScene = load(pause_path)
+			var menu = pause_scene.instantiate()
+			cam_canvas.add_child(menu)
 	else:
-		screen.modulate = Color("ffffffff")
-		screen.process_mode = Node.PROCESS_MODE_INHERIT
+		play.emit()
+		var pause_scene = cam_canvas.find_child("Pause*", false, false)
+		if pause_scene != null:
+			pause_scene.queue_free()
+	
+	if restarting:
+		if screen.find_child("Game*", false, false) == null:
+			return
 		
-		var i = get_children().find_custom(use_name.bind("Pause"))
-		
-		if i != -1:
-			get_children()[i].queue_free()
+		_on_game_start()
 
 
 func _process(_delta: float) -> void:
+	restarting = false
 	if Input.is_action_just_pressed("pause"):
 		paused = !paused
 	
+	if Input.is_action_just_pressed("restart"):
+		restarting = true
+	
 	check_state()
+
+
+func _on_game_start() -> void:
+	camera.enabled = false
+	
+	for child in screen.get_children():
+		if child.name != "Camera":
+			child.queue_free()
+	
+	var game_screen : PackedScene = load(game_path)
+	var game = game_screen.instantiate()
+	pause.connect(game.pause)
+	play.connect(game.play)
+	
+	game.paused.connect(game_paused)
+	game.playing.connect(game_playing)
+	game.lose.connect(game_lose)
+	
+	screen.add_child(game)
+
+
+func adjust_camera() -> void:
+	var game_screen : Control = screen.find_child("Game*", false, false)
+	if game_screen == null:
+		return
+	
+	var game_cam : Camera2D = game_screen.find_child("PlayerCamera")
+	camera.global_position.x = game_cam.global_position.x/2
+
+
+func game_paused() -> void:
+	adjust_camera()
+	camera.enabled = true
+	screen.modulate = Color("646464ff")
+	screen.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func game_playing() -> void:
+	camera.enabled = false
+	screen.modulate = Color("ffffffff")
+	screen.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func game_lose() -> void:
+	adjust_camera()
+	camera.enabled = true

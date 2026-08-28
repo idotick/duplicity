@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://cotsfboh8lo78"]
+
+[ext_resource type="Script" uid="uid://bt4xtxm3eognu" path="res://src/antiplayer/antiplayer.gd" id="1_m78pe"]
+[ext_resource type="Texture2D" uid="uid://443gr1jgjtgy" path="res://assets/Player.png" id="1_qdmws"]
+[ext_resource type="Script" uid="uid://ckcl43166kcb1" path="res://src/antiplayer/body.gd" id="2_mp4c1"]
+
+[sub_resource type="Curve2D" id="Curve2D_qdmws"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxibo"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf2ua"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_244u8"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f2sf"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiejy"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o822w"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x42xx"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l271a"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ydov"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylhto"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwolq"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2smqc"]
+atlas = ExtResource("1_qdmws")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m78pe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxibo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf2ua")
+}],
+"loop": 1,
+"name": &"damage",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_244u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f2sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jiejy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o822w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x42xx")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l271a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ydov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylhto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwolq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2smqc")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q83b"]
+size = Vector2(11, 30.470577)
+
+[node name="Antiplayer" type="Path2D" unique_id=1507810664]
+curve = SubResource("Curve2D_qdmws")
+script = ExtResource("1_m78pe")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=135537073]
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="Antiplayer" type="CharacterBody2D" parent="PathFollow2D" unique_id=415212373]
+collision_mask = 0
+script = ExtResource("2_mp4c1")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="PathFollow2D/Antiplayer" unique_id=288961015]
+modulate = Color(0.4519397, 0.45193976, 0.4519397, 1)
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_m78pe")
+animation = &"walk"
+
+[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer" unique_id=1642242208]
+position = Vector2(-0.5, 13.639998)
+scale = Vector2(1, 0.6800003)
+shape = SubResource("RectangleShape2D_0q83b")
+
+[node name="TrackerDelay" type="Timer" parent="." unique_id=285535477]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="TrackerDelay" to="." method="_on_tracker_delay_timeout"]

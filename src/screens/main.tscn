@@ -24,4 +24,12 @@ grow_vertical = 2
 [node name="Title" parent="Screen" unique_id=1058211172 instance=ExtResource("2_xgsyd")]
 layout_mode = 1
 
+[node name="Camera" type="Camera2D" parent="Screen" unique_id=182374655]
+offset = Vector2(640, 360)
+limit_bottom = 720
+
+[node name="Canvas" type="CanvasLayer" parent="Screen/Camera" unique_id=2016778143]
+
 [node name="SoundManager" parent="." unique_id=1133291672 instance=ExtResource("2_fav7m")]
+
+[connection signal="game_start" from="Screen/Title" to="." method="_on_game_start"]

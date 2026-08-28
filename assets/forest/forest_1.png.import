@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ccl3w73p2qa"
-path="res://.godot/imported/GrassLand_Cloud_1.png-4e03060d5b1a93780a9457e1499c4275.ctex"
+uid="uid://sd3t6lr2w3f0"
+path="res://.godot/imported/forest_1.png-4f567f707e6564861965c2e86abd0db3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/parallaxbg/GrassLand_Cloud_1.png"
-dest_files=["res://.godot/imported/GrassLand_Cloud_1.png-4e03060d5b1a93780a9457e1499c4275.ctex"]
+source_file="res://assets/forest/forest_1.png"
+dest_files=["res://.godot/imported/forest_1.png-4f567f707e6564861965c2e86abd0db3.ctex"]
 
 [params]
 

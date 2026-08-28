@@ -3,12 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://1wxw1rh37x1g" path="res://src/player/player.tscn" id="1_5y5ys"]
 [ext_resource type="Texture2D" uid="uid://c2bmjovupntj5" path="res://assets/Ground Tileset.png" id="1_ehq0v"]
 [ext_resource type="Script" uid="uid://crv4s8c8qispj" path="res://src/screens/game.gd" id="1_ox7v8"]
-[ext_resource type="Texture2D" uid="uid://d1n6ru2l02drq" path="res://assets/parallaxbg/GrassLand_Background_1.png" id="2_aehps"]
-[ext_resource type="Texture2D" uid="uid://ce21tdk1inv7p" path="res://assets/parallaxbg/GrassLand_Background_2.png" id="3_yodwr"]
-[ext_resource type="Texture2D" uid="uid://cwv2uv65ryc7s" path="res://assets/parallaxbg/GrassLand_Background_3.png" id="4_5vl65"]
+[ext_resource type="Texture2D" uid="uid://bs7jtu4efwfep" path="res://assets/forest/forest_0.png" id="2_66r2r"]
+[ext_resource type="Texture2D" uid="uid://sd3t6lr2w3f0" path="res://assets/forest/forest_1.png" id="3_aehps"]
 [ext_resource type="PackedScene" uid="uid://cotsfboh8lo78" path="res://src/antiplayer/antiplayer.tscn" id="4_y0iti"]
-[ext_resource type="Texture2D" uid="uid://mpdc68yhp8ir" path="res://assets/parallaxbg/GrassLand_Background_4.png" id="5_8jo15"]
-[ext_resource type="Texture2D" uid="uid://bys17n750ydso" path="res://assets/parallaxbg/GrassLand_Background_5.png" id="6_pcy4t"]
+[ext_resource type="Texture2D" uid="uid://cuv06hm8js2i3" path="res://assets/forest/forest_2.png" id="4_yodwr"]
+[ext_resource type="Texture2D" uid="uid://bhwxqkhikpn61" path="res://assets/forest/forest_3.png" id="5_5vl65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5y5ys"]
 texture = ExtResource("1_ehq0v")
@@ -88,58 +87,45 @@ script = ExtResource("1_ox7v8")
 
 [node name="Background" type="Node2D" parent="." unique_id=673384716]
 
-[node name="Parallax2D" type="Parallax2D" parent="Background" unique_id=1608864429]
-repeat_size = Vector2(1280, 0)
+[node name="Parallax2D" type="Parallax2D" parent="Background" unique_id=2041439042]
+scroll_scale = Vector2(0, 1)
+repeat_size = Vector2(1278, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Background/Parallax2D" unique_id=1114200693]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D" unique_id=106558453]
 texture_filter = 1
-scale = Vector2(3.478, 3.478)
-texture = ExtResource("2_aehps")
+texture = ExtResource("2_66r2r")
 centered = false
 
-[node name="Parallax2D2" type="Parallax2D" parent="Background" unique_id=12535117]
-scroll_scale = Vector2(0.8, 0.8)
-repeat_size = Vector2(1391.304, 0)
+[node name="Parallax2D2" type="Parallax2D" parent="Background" unique_id=547244657]
+repeat_size = Vector2(1278, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Background/Parallax2D2" unique_id=130434378]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D2" unique_id=282259217]
 texture_filter = 1
-scale = Vector2(3.478, 3.478)
-texture = ExtResource("3_yodwr")
+texture = ExtResource("3_aehps")
 centered = false
 
-[node name="Parallax2D3" type="Parallax2D" parent="Background" unique_id=1239172466]
-scroll_scale = Vector2(0.9, 0.9)
-repeat_size = Vector2(1446.957, 0)
+[node name="Parallax2D3" type="Parallax2D" parent="Background" unique_id=94782533]
+scroll_scale = Vector2(1.2, 1)
+repeat_size = Vector2(1278, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Background/Parallax2D3" unique_id=200880581]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D3" unique_id=865139960]
 texture_filter = 1
-scale = Vector2(3.478, 3.478)
-texture = ExtResource("4_5vl65")
+texture = ExtResource("4_yodwr")
 centered = false
 
-[node name="Parallax2D4" type="Parallax2D" parent="Background" unique_id=1914105935]
-repeat_size = Vector2(1558.261, 0)
-
-[node name="Sprite" type="Sprite2D" parent="Background/Parallax2D4" unique_id=456059689]
-texture_filter = 1
-scale = Vector2(3.478, 3.478)
-texture = ExtResource("5_8jo15")
-centered = false
-
-[node name="Parallax2D5" type="Parallax2D" parent="Background" unique_id=37318876]
+[node name="Parallax2D4" type="Parallax2D" parent="Background" unique_id=1728321629]
 scroll_scale = Vector2(1.3, 1)
-repeat_size = Vector2(1280, 0)
+repeat_size = Vector2(1278, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Background/Parallax2D5" unique_id=913047717]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D4" unique_id=2025831362]
 texture_filter = 1
-scale = Vector2(3.478, 3.478)
-texture = ExtResource("6_pcy4t")
+texture = ExtResource("5_5vl65")
 centered = false
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=232592826]
 position = Vector2(64, 566)
 ignore_rotation = false
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_bottom = 720
 position_smoothing_enabled = true

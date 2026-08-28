@@ -121,7 +121,8 @@ cubic_interp = false
 loop = false
 
 [node name="Antiplayer" type="CharacterBody2D" parent="PathFollow2D" unique_id=415212373]
-collision_mask = 0
+collision_layer = 0
+platform_floor_layers = 4294967041
 script = ExtResource("2_mp4c1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="PathFollow2D/Antiplayer" unique_id=288961015]
@@ -131,7 +132,16 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_m78pe")
 animation = &"walk"
 
-[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer" unique_id=1642242208]
+[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer" unique_id=1576336248]
+position = Vector2(-0.5, 13.639998)
+scale = Vector2(1, 0.6800003)
+shape = SubResource("RectangleShape2D_0q83b")
+
+[node name="Hitbox" type="Area2D" parent="PathFollow2D/Antiplayer" unique_id=77058459]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer/Hitbox" unique_id=1642242208]
 position = Vector2(-0.5, 13.639998)
 scale = Vector2(1, 0.6800003)
 shape = SubResource("RectangleShape2D_0q83b")

@@ -109,6 +109,8 @@ animations = [{
 size = Vector2(11, 30.470577)
 
 [node name="Player" type="CharacterBody2D" unique_id=1896544933]
+collision_layer = 2
+platform_floor_layers = 4294967041
 script = ExtResource("1_rxibo")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=195771379]
@@ -122,12 +124,27 @@ position = Vector2(-0.5, 13.639998)
 scale = Vector2(1, 0.6800003)
 shape = SubResource("RectangleShape2D_710pl")
 
+[node name="Hurtbox" type="Area2D" parent="." unique_id=844437051]
+collision_layer = 0
+collision_mask = 12
+
+[node name="Collision" type="CollisionShape2D" parent="Hurtbox" unique_id=1351414832]
+position = Vector2(-0.5, 13.639998)
+scale = Vector2(1, 0.6800003)
+shape = SubResource("RectangleShape2D_710pl")
+
 [node name="CoyoteTime" type="Timer" parent="." unique_id=358432247]
 wait_time = 0.12
 one_shot = true
 
-[node name="AirHangTime" type="Timer" parent="." unique_id=282029159]
-wait_time = 0.15
+[node name="DashTime" type="Timer" parent="." unique_id=282029159]
+wait_time = 0.2
 one_shot = true
 
+[node name="DashCooldown" type="Timer" parent="." unique_id=1896689898]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="CoyoteTime" to="." method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]

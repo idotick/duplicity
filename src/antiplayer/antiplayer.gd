@@ -11,6 +11,7 @@ var tracking : bool = false
 
 func _ready() -> void:
 	tracker_delay.start()
+	pass
 
 
 func _process(_delta: float) -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwv2uv65ryc7s"
-path="res://.godot/imported/GrassLand_Background_3.png-8f543caf34b8e928f47b127932899ab1.ctex"
+uid="uid://d3jtfycyuylb3"
+path="res://.godot/imported/crystalcave_7.png-b2921ccaf7141d3d9f4e65d6bce75221.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/parallaxbg/GrassLand_Background_3.png"
-dest_files=["res://.godot/imported/GrassLand_Background_3.png-8f543caf34b8e928f47b127932899ab1.ctex"]
+source_file="res://assets/crystal cave/crystalcave_7.png"
+dest_files=["res://.godot/imported/crystalcave_7.png-b2921ccaf7141d3d9f4e65d6bce75221.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce21tdk1inv7p"
-path="res://.godot/imported/GrassLand_Background_2.png-d402e8ee2846106935335c7f380105f7.ctex"
+uid="uid://bpum5ovd5vuah"
+path="res://.godot/imported/epiccave.png-2b5c00db42adfbddcbc930433e62d5ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/parallaxbg/GrassLand_Background_2.png"
-dest_files=["res://.godot/imported/GrassLand_Background_2.png-d402e8ee2846106935335c7f380105f7.ctex"]
+source_file="res://assets/ui/epiccave.png"
+dest_files=["res://.godot/imported/epiccave.png-2b5c00db42adfbddcbc930433e62d5ff.ctex"]
 
 [params]
 

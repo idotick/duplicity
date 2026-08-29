@@ -12,6 +12,9 @@ const SPEED = 300.0
 var path_index : int = 0
 
 func _process(_delta: float) -> void:
+	if velocity.y < 0:
+		sprite.play("jump")
+	
 	if velocity.x > 0:
 		sprite.play("walk")
 		sprite.flip_h = false
@@ -19,7 +22,7 @@ func _process(_delta: float) -> void:
 		sprite.play("walk")
 		sprite.flip_h = true
 	else:
-		$Sprite.play("default")
+		$Sprite.play("idle")
 
 
 func _physics_process(_delta: float) -> void:

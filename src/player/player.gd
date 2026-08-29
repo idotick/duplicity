@@ -6,65 +6,106 @@ signal death
 
 const DASH_SPEED = 300.0
 const SPEED = 250.0
-const JUMP_VELOCITY = -50.0
-const PEAK_JUMP_TICK = 8
+const JUMP_VELOCITY = -55.0
+const PEAK_JUMP_TICK = 6
+
+@export var gravity_multipler = 2.0
 
 @onready var cam : Camera2D = get_node(camera)
 @onready var falling : bool = not is_on_floor()
+@onready var RNG := RandomNumberGenerator.new()
 
 var moving : bool = false
-var jump_released : bool = false
+var jumping : bool = false
 var jump_tick : int = 0
+
 var dash_limit : int = 1
 var n_dashes : int = 0
 var dashing : bool = false
 
+var climbing : bool = false
+var can_climb : bool = false
+var tired : bool = false
+
 
 func _process(_delta: float) -> void:
-	if velocity.x > 0:
+	RNG.randomize()
+	
+	if climbing:
+		if $Sprite.animation != "sweat":
+			$Sprite.play("sweat")
+	elif moving:
+		var direction := Input.get_axis("left", "right")
+		$Sprite.flip_h = direction < 0
 		$Sprite.play("walk")
-		$Sprite.flip_h = false
-	elif velocity.x < 0:
-		$Sprite.play("walk")
-		$Sprite.flip_h = true
+	elif jumping and not is_on_floor():
+		$Sprite.play("jump")
 	else:
-		$Sprite.play("default")
+		if not $RestTimer.is_stopped():
+			$Sprite.play("idle")
+		elif $Sprite.animation != "rest":
+			$RestTimer.wait_time = RNG.randi_range(5, 10)
+			$RestTimer.start()
+
+	if dashing:
+		$Sprite.play("dash")
 
 
-func _physics_process(delta: float) -> void:
-	var gravity = get_gravity()
-	var was_on_floor = is_on_floor()
-	
-	if is_on_floor() and $DashCooldown.is_stopped():
-		n_dashes = 0
-	
+func handle_jumping() -> void:
 	if Input.is_action_pressed("jump") and (is_on_floor() or not falling):
-		jump_released = false
+		jumping = true
 		
 		if jump_tick < PEAK_JUMP_TICK:
 			velocity.y += JUMP_VELOCITY
-		
-			var mult = lerp(1.0, 0.75, jump_tick)
-			gravity = mult * get_gravity()
 			
 		jump_tick += 1
 		
 	if Input.is_action_just_released("jump"):
-		jump_released = true
-		velocity.y /= 2
+		jumping = false
 		jump_tick = 0
+		velocity.y /= 2
+
+
+func handle_climbing(gravity: Vector2) -> void:
+	if Input.is_action_just_pressed("climb"):
+		$ClimbLimit.start()
 	
-	if falling:
-		if jump_released:
-			gravity = 2 * get_gravity()
+	if Input.is_action_pressed("climb") and can_climb:
+		gravity = Vector2.ZERO
+		velocity.y = 0
+		if Input.is_action_pressed("jump"):
+			climbing = true
+			var climb_delta = $ClimbLimit.time_left
+			var mult = 2 * inverse_lerp(0.0, $ClimbLimit.wait_time, climb_delta)
+			
+			velocity.y = (mult + 0.5) * JUMP_VELOCITY
 		
+		$CoyoteTime.start()
+	
+	if Input.is_action_just_released("climb"):
+		$CoyoteTime.stop()
+		$ClimbLimit.stop()
+		climbing = false
+
+
+func handle_gravity(gravity: Vector2, delta: float) -> void:
+	if falling:
+		if jumping:
+			var jump_delta = inverse_lerp(0, PEAK_JUMP_TICK * 2, jump_tick)
+			var mult = lerp(gravity_multipler, 1.5, jump_delta)
+			gravity = mult * get_gravity()
+		else:
+			gravity = gravity_multipler * get_gravity()
+	
 		velocity += gravity * delta
 		$CoyoteTime.stop()
-	
+
+
+func handle_dashing() -> void:
 	if Input.is_action_just_pressed("dash") and n_dashes < dash_limit:
 		$Hurtbox.set_collision_mask_value(3, false)
 		$DashTime.start()
-		was_on_floor = true
+		can_climb = false
 		dashing = true
 		
 		$DashCooldown.start()
@@ -73,20 +114,44 @@ func _physics_process(delta: float) -> void:
 	if not moving and dashing:
 		if $Sprite.flip_h:
 			velocity.x = -(DASH_SPEED + SPEED)
+			$DashParticles.gravity = Vector2(980, 0)
 		else:
 			velocity.x = (DASH_SPEED + SPEED)
+			$DashParticles.gravity = -Vector2(980, 0)
+		
+		$DashParticles.emitting = true
+		$Sprite.play("dash")
+
+
+func _physics_process(delta: float) -> void:
+	var was_on_floor = is_on_floor()
+	var gravity = get_gravity()
+	
+	if is_on_floor():
+		if $DashCooldown.is_stopped():
+			n_dashes = 0
+		climbing = false
+		tired = false
+	
+	if (not climbing and not jumping):
+		falling = true
+	
+	handle_jumping()
+	handle_climbing(gravity)
+	handle_dashing()
+	handle_gravity(gravity, delta)
 	
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		moving = true
 		velocity.x = direction * SPEED
-		
 		if dashing:
+			$DashParticles.emitting = true
+			$DashParticles.gravity = -direction * Vector2(980, 0)
 			velocity.x += direction * DASH_SPEED
 	else:
 		moving = false
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
 	
 	if abs(velocity) > Vector2.ZERO:
 		cam.global_position = lerp(cam.global_position, global_position, 0.2)
@@ -112,3 +177,22 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		death.emit()
 		queue_free()
 		area.owner.queue_free()
+
+
+func _on_rest_timer_timeout() -> void:
+	$Sprite.play("rest")
+
+
+func _on_climbbox_body_entered(body: Node2D) -> void:
+	if body is TileMapLayer and not tired:
+		can_climb = true
+
+
+func _on_climbbox_body_exited(body: Node2D) -> void:
+	if body is TileMapLayer:
+		can_climb = false
+
+
+func _on_climb_limit_timeout() -> void:
+	can_climb = false
+	tired = true

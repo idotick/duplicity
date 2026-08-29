@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var point_interval : int = 6
+@export var point_interval : int = 5
 @export var distance_threshold : float = 3
 
 const SPEED = 300.0

@@ -1,6 +1,40 @@
 [gd_scene format=3 uid="uid://bkpmuchmbfaol"]
 
 [ext_resource type="Script" uid="uid://c2iocajubs8l1" path="res://src/sounds/sound_manager.gd" id="1_neok5"]
+[ext_resource type="AudioStream" uid="uid://lso2edoh74xx" path="res://assets/music/Adventure's Spirit - Title Theme.wav" id="2_dcc0a"]
+[ext_resource type="AudioStream" uid="uid://k1be60db6eci" path="res://assets/music/Magic Elderwood Forest - Overworld.wav" id="2_njgy7"]
+[ext_resource type="AudioStream" uid="uid://4j3tguj4yl12" path="res://assets/music/A Great Journey - Overworld.wav" id="3_jcjeo"]
+[ext_resource type="AudioStream" uid="uid://b711dfr3cnim2" path="res://assets/music/A Hollow Darkness - Cave.wav" id="5_q18p3"]
+[ext_resource type="AudioStream" uid="uid://cjaesn255dy5" path="res://assets/music/Secret Passage - Dungeon .wav" id="6_f8udb"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_710pl"]
+random_pitch = 1.0905077
+streams_count = 2
+stream_0/stream = ExtResource("2_njgy7")
+stream_1/stream = ExtResource("3_jcjeo")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lbunj"]
+random_pitch = 1.0905077
+streams_count = 2
+stream_0/stream = ExtResource("5_q18p3")
+stream_1/stream = ExtResource("6_f8udb")
 
 [node name="SoundManager" type="Node" unique_id=1133291672]
 script = ExtResource("1_neok5")
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="." unique_id=1873110657]
+stream = ExtResource("2_dcc0a")
+
+[node name="ForestMusic" type="AudioStreamPlayer" parent="." unique_id=2057926158]
+stream = SubResource("AudioStreamRandomizer_710pl")
+
+[node name="CaveMusic" type="AudioStreamPlayer" parent="." unique_id=1034944221]
+stream = SubResource("AudioStreamRandomizer_lbunj")
+
+[node name="MusicDelay" type="Timer" parent="." unique_id=888036393]
+one_shot = true
+
+[connection signal="finished" from="TitleMusic" to="." method="on_music_finished"]
+[connection signal="finished" from="ForestMusic" to="." method="on_music_finished"]
+[connection signal="finished" from="CaveMusic" to="." method="on_music_finished"]
+[connection signal="timeout" from="MusicDelay" to="." method="_on_music_delay_timeout"]

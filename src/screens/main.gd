@@ -10,6 +10,7 @@ signal play
 @onready var screen: Control = $Screen
 @onready var camera: Camera2D = $Screen/Camera
 @onready var cam_canvas: CanvasLayer = $Screen/Camera/Canvas
+@onready var sound_manager: Node = $SoundManager
 
 var paused : bool = false
 var restarting : bool = false
@@ -17,6 +18,7 @@ var restarting : bool = false
 
 func _ready() -> void:
 	get_window().min_size = Vector2(1280, 720)
+	sound_manager.play("title_music")
 
 
 func check_state() -> void:
@@ -25,12 +27,14 @@ func check_state() -> void:
 	
 	if paused:
 		pause.emit()
+		sound_manager.change_volume("", 0.25, 0.01)
 		if cam_canvas.find_child("Pause*", false, false) == null:
 			var pause_scene : PackedScene = load(pause_path)
 			var menu = pause_scene.instantiate()
 			cam_canvas.add_child(menu)
 	else:
 		play.emit()
+		sound_manager.change_volume("", 1, 0.01)
 		var pause_scene = cam_canvas.find_child("Pause*", false, false)
 		if pause_scene != null:
 			pause_scene.queue_free()
@@ -42,19 +46,33 @@ func check_state() -> void:
 		_on_game_start()
 
 
+func fade_out(duration: float) -> void:
+	var tween = create_tween()
+	
+	tween.tween_property(screen, "modulate", Color("000000"), duration)
+	
+	await tween.finished
+	screen.modulate = Color("ffffff")
+
+
 func _process(_delta: float) -> void:
 	restarting = false
 	if Input.is_action_just_pressed("pause"):
 		paused = !paused
+		check_state()
 	
 	if Input.is_action_just_pressed("restart"):
 		restarting = true
-	
-	check_state()
+		check_state()
 
 
 func _on_game_start() -> void:
+	fade_out(1.0)
+	sound_manager.fade_out("", 1.0)
+	await sound_manager.silenced
+	
 	camera.enabled = false
+	sound_manager.play("forest_music")
 	
 	for child in screen.get_children():
 		if child.name != "Camera":

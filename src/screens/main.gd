@@ -9,8 +9,8 @@ signal play
 
 @onready var screen: Control = $Screen
 @onready var camera: Camera2D = $Screen/Camera
-@onready var cam_canvas: CanvasLayer = $Screen/Camera/Canvas
-@onready var sound_manager: Node = $SoundManager
+@onready var cam_overlay: Control = $Screen/Camera/Canvas/Overlays
+@onready var sound_manager: Node = $Music
 
 var paused : bool = false
 var restarting : bool = false
@@ -28,14 +28,14 @@ func check_state() -> void:
 	if paused:
 		pause.emit()
 		sound_manager.change_volume("", 0.25, 0.01)
-		if cam_canvas.find_child("Pause*", false, false) == null:
+		if cam_overlay.find_child("Pause*", false, false) == null:
 			var pause_scene : PackedScene = load(pause_path)
 			var menu = pause_scene.instantiate()
-			cam_canvas.add_child(menu)
+			cam_overlay.add_child(menu)
 	else:
 		play.emit()
 		sound_manager.change_volume("", 1, 0.01)
-		var pause_scene = cam_canvas.find_child("Pause*", false, false)
+		var pause_scene = cam_overlay.find_child("Pause*", false, false)
 		if pause_scene != null:
 			pause_scene.queue_free()
 	

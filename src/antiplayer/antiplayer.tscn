@@ -1,15 +1,34 @@
 [gd_scene format=3 uid="uid://cotsfboh8lo78"]
 
-[ext_resource type="Script" uid="uid://bt4xtxm3eognu" path="res://src/antiplayer/antiplayer.gd" id="1_m78pe"]
-[ext_resource type="Script" uid="uid://ckcl43166kcb1" path="res://src/antiplayer/body.gd" id="2_mp4c1"]
+[ext_resource type="Script" uid="uid://ckcl43166kcb1" path="res://src/antiplayer/antiplayer.gd" id="1_m78pe"]
 [ext_resource type="Texture2D" uid="uid://dgljpqxbrebok" path="res://assets/knight/KNIGHT DASH.png" id="3_weh1j"]
 [ext_resource type="Texture2D" uid="uid://5olvclnd8ox5" path="res://assets/knight/knight idle normal.png" id="4_ggqmc"]
+[ext_resource type="Texture2D" uid="uid://cpcfuybljp06t" path="res://assets/knight/kabooie/frame_00_delay-0.01s.png" id="5_2ebri"]
 [ext_resource type="Texture2D" uid="uid://y8ic5uho2wke" path="res://assets/knight/knight jump.png" id="5_bfaaw"]
 [ext_resource type="Texture2D" uid="uid://2m03h17j6jfa" path="res://assets/knight/knight idle.png" id="6_b00vt"]
+[ext_resource type="Texture2D" uid="uid://cx5yvjagvhlo0" path="res://assets/knight/kabooie/frame_01_delay-0.01s.png" id="6_oudtp"]
+[ext_resource type="Texture2D" uid="uid://x87be54qme1m" path="res://assets/knight/kabooie/frame_02_delay-0.01s.png" id="7_3x78v"]
 [ext_resource type="Texture2D" uid="uid://du1uwdhtdmo70" path="res://assets/knight/knight sweat.png" id="7_slr8l"]
 [ext_resource type="Texture2D" uid="uid://bg3oudvyb5sn0" path="res://assets/knight/knight run.png" id="8_j4nyg"]
+[ext_resource type="Texture2D" uid="uid://icqo78xwpac2" path="res://assets/knight/kabooie/frame_03_delay-0.01s.png" id="8_k5w1x"]
+[ext_resource type="Texture2D" uid="uid://csuivm3osdb7o" path="res://assets/knight/kabooie/frame_04_delay-0.01s.png" id="9_hua5s"]
+[ext_resource type="Texture2D" uid="uid://blk0jllrrgxpi" path="res://assets/knight/kabooie/frame_05_delay-0.01s.png" id="10_f6d7f"]
+[ext_resource type="Texture2D" uid="uid://lyy5jhrmlp12" path="res://assets/knight/kabooie/frame_06_delay-0.01s.png" id="11_avyes"]
+[ext_resource type="Texture2D" uid="uid://3p135eybrllo" path="res://assets/knight/kabooie/frame_07_delay-0.01s.png" id="12_rvvgy"]
+[ext_resource type="Texture2D" uid="uid://24wn0ef4ny46" path="res://assets/knight/kabooie/frame_08_delay-0.01s.png" id="13_g6m1f"]
+[ext_resource type="Texture2D" uid="uid://buhhg4f7vttnc" path="res://assets/knight/kabooie/frame_09_delay-0.01s.png" id="14_54e0x"]
+[ext_resource type="Texture2D" uid="uid://dga3cx2q5ub32" path="res://assets/knight/kabooie/frame_10_delay-0.01s.png" id="15_6tlxh"]
+[ext_resource type="Texture2D" uid="uid://bbwa38vjjm7ls" path="res://assets/knight/kabooie/frame_11_delay-0.01s.png" id="16_2fypl"]
+[ext_resource type="Texture2D" uid="uid://b32ap2b1go6ab" path="res://assets/knight/kabooie/frame_12_delay-0.01s.png" id="17_35xwy"]
+[ext_resource type="Texture2D" uid="uid://crnj6faos6bkf" path="res://assets/knight/kabooie/frame_13_delay-0.01s.png" id="18_80606"]
+[ext_resource type="Texture2D" uid="uid://dkd32lk8tf7st" path="res://assets/knight/kabooie/frame_14_delay-0.01s.png" id="19_sd4v8"]
+[ext_resource type="Texture2D" uid="uid://dtofa4jn8n7u6" path="res://assets/knight/kabooie/frame_15_delay-0.01s.png" id="20_be8fn"]
+[ext_resource type="Texture2D" uid="uid://bwxhcr700q7ng" path="res://assets/knight/kabooie/frame_16_delay-0.01s.png" id="21_cr6fy"]
 
-[sub_resource type="Curve2D" id="Curve2D_qdmws"]
+[sub_resource type="Curve" id="Curve_l2has"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5shm8"]
 atlas = ExtResource("3_weh1j")
@@ -223,42 +242,137 @@ size = Vector2(11, 18.705877)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggqmc"]
 size = Vector2(11, 10.294113)
 
-[node name="Antiplayer" type="Path2D" unique_id=1507810664]
-curve = SubResource("Curve2D_qdmws")
-script = ExtResource("1_m78pe")
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ebri"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_g6m1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_54e0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6tlxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_2fypl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_35xwy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_80606")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_sd4v8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_be8fn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_cr6fy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2ebri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oudtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3x78v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k5w1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hua5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f6d7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_avyes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rvvgy")
+}],
+"loop": 0,
+"name": &"respawn",
+"speed": 16.0
+}]
 
-[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=135537073]
-rotates = false
-cubic_interp = false
-loop = false
-
-[node name="Antiplayer" type="CharacterBody2D" parent="PathFollow2D" unique_id=415212373]
+[node name="Antiplayer" type="CharacterBody2D" unique_id=415212373]
 collision_layer = 0
 platform_floor_layers = 4294967041
-script = ExtResource("2_mp4c1")
+script = ExtResource("1_m78pe")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="PathFollow2D/Antiplayer" unique_id=1354758394]
+[node name="DashParticles" type="CPUParticles2D" parent="." unique_id=1687543782]
+position = Vector2(0, 1)
+emitting = false
+amount = 12
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(1, 13)
+scale_amount_min = 0.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_l2has")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1354758394]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_t5fv7")
-animation = &"idle"
+animation = &"stand"
 
-[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer" unique_id=1691845785]
-position = Vector2(-0.5, 9.639998)
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1691845785]
+position = Vector2(0, 9.64)
 scale = Vector2(1, 0.6800003)
 shape = SubResource("RectangleShape2D_weh1j")
 
-[node name="Hitbox" type="Area2D" parent="PathFollow2D/Antiplayer" unique_id=77058459]
+[node name="Hitbox" type="Area2D" parent="." unique_id=77058459]
 collision_layer = 4
 collision_mask = 0
 
-[node name="Collision" type="CollisionShape2D" parent="PathFollow2D/Antiplayer/Hitbox" unique_id=618381457]
-position = Vector2(-0.5, 12.5)
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" unique_id=618381457]
+position = Vector2(0, 12.5)
 scale = Vector2(1, 0.6800003)
 shape = SubResource("RectangleShape2D_ggqmc")
 
-[node name="TrackerDelay" type="Timer" parent="." unique_id=285535477]
-wait_time = 2.0
+[node name="Navigator" type="NavigationAgent2D" parent="." unique_id=221422758]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="RayCast" type="RayCast2D" parent="." unique_id=1568554225]
+position = Vector2(0, 16)
+target_position = Vector2(0, 0)
+
+[node name="DashTime" type="Timer" parent="." unique_id=146559903]
+process_callback = 0
+wait_time = 0.2
 one_shot = true
 
-[connection signal="timeout" from="TrackerDelay" to="." method="_on_tracker_delay_timeout"]
+[node name="WakeDelay" type="Timer" parent="." unique_id=285535477]
+wait_time = 5.0
+one_shot = true
+
+[node name="KABOOIE" type="AnimatedSprite2D" parent="." unique_id=551876912]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_2ebri")
+animation = &"respawn"
+autoplay = "default"
+frame = 16
+frame_progress = 1.0
+
+[connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
+[connection signal="timeout" from="WakeDelay" to="." method="_on_wake_delay_timeout"]
+[connection signal="animation_finished" from="KABOOIE" to="." method="_on_kabooie_animation_finished"]

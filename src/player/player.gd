@@ -7,9 +7,20 @@ signal death
 const DASH_SPEED = 300.0
 const SPEED = 250.0
 const JUMP_VELOCITY = -55.0
-const PEAK_JUMP_TICK = 6
+const PEAK_JUMP_TICK = 8
+const G_MULT = 2.0
 
-@export var gravity_multipler = 2.0
+@onready var dash_particles: CPUParticles2D = $DashParticles
+@onready var sprite: AnimatedSprite2D = $Sprite
+@onready var hurtbox: Area2D = $Hurtbox
+@onready var sfx: Node = $"../Effects"
+
+@onready var coyote_time: Timer = $CoyoteTime
+@onready var dash_time: Timer = $DashTime
+@onready var dash_cooldown: Timer = $DashCooldown
+@onready var rest_timer: Timer = $RestTimer
+@onready var climb_limit: Timer = $ClimbLimit
+
 
 @onready var cam : Camera2D = get_node(camera)
 @onready var falling : bool = not is_on_floor()
@@ -41,14 +52,20 @@ func _process(_delta: float) -> void:
 	elif jumping and not is_on_floor():
 		$Sprite.play("jump")
 	else:
-		if not $RestTimer.is_stopped():
+		if not rest_timer.is_stopped():
 			$Sprite.play("idle")
 		elif $Sprite.animation != "rest":
-			$RestTimer.wait_time = RNG.randi_range(5, 10)
-			$RestTimer.start()
-
+			rest_timer.wait_time = RNG.randi_range(5, 10)
+			rest_timer.start()
+	
 	if dashing:
 		$Sprite.play("dash")
+	
+	if Input.is_action_just_pressed("jump"):
+		sfx.play("jump")
+	
+	if Input.is_action_just_pressed("dash"):
+		sfx.play("dash")
 
 
 func handle_jumping() -> void:
@@ -68,23 +85,23 @@ func handle_jumping() -> void:
 
 func handle_climbing(gravity: Vector2) -> void:
 	if Input.is_action_just_pressed("climb"):
-		$ClimbLimit.start()
+		climb_limit.start()
 	
 	if Input.is_action_pressed("climb") and can_climb:
 		gravity = Vector2.ZERO
 		velocity.y = 0
 		if Input.is_action_pressed("jump"):
 			climbing = true
-			var climb_delta = $ClimbLimit.time_left
-			var mult = 2 * inverse_lerp(0.0, $ClimbLimit.wait_time, climb_delta)
+			var climb_delta = climb_limit.time_left
+			var mult = 2 * inverse_lerp(0.0, climb_limit.wait_time, climb_delta)
 			
 			velocity.y = (mult + 0.5) * JUMP_VELOCITY
 		
-		$CoyoteTime.start()
+		coyote_time.start()
 	
 	if Input.is_action_just_released("climb"):
-		$CoyoteTime.stop()
-		$ClimbLimit.stop()
+		coyote_time.stop()
+		climb_limit.stop()
 		climbing = false
 
 
@@ -92,23 +109,23 @@ func handle_gravity(gravity: Vector2, delta: float) -> void:
 	if falling:
 		if jumping:
 			var jump_delta = inverse_lerp(0, PEAK_JUMP_TICK * 2, jump_tick)
-			var mult = lerp(gravity_multipler, 1.5, jump_delta)
+			var mult = lerp(G_MULT, 1.5, jump_delta)
 			gravity = mult * get_gravity()
 		else:
-			gravity = gravity_multipler * get_gravity()
+			gravity = G_MULT * get_gravity()
 	
 		velocity += gravity * delta
-		$CoyoteTime.stop()
+		coyote_time.stop()
 
 
 func handle_dashing() -> void:
 	if Input.is_action_just_pressed("dash") and n_dashes < dash_limit:
 		$Hurtbox.set_collision_mask_value(3, false)
-		$DashTime.start()
+		dash_time.start()
 		can_climb = false
 		dashing = true
 		
-		$DashCooldown.start()
+		dash_cooldown.start()
 		n_dashes += 1
 	
 	if not moving and dashing:
@@ -128,7 +145,7 @@ func _physics_process(delta: float) -> void:
 	var gravity = get_gravity()
 	
 	if is_on_floor():
-		if $DashCooldown.is_stopped():
+		if dash_cooldown.is_stopped():
 			n_dashes = 0
 		climbing = false
 		tired = false
@@ -159,7 +176,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if is_on_floor() != was_on_floor:
-		$CoyoteTime.start()
+		coyote_time.start()
 		falling = false
 
 
@@ -174,6 +191,7 @@ func _on_dash_time_timeout() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.name == "Hitbox":
+		sfx.play("death")
 		death.emit()
 		queue_free()
 		area.owner.queue_free()

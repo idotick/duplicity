@@ -1,26 +1,103 @@
-extends Path2D
+extends CharacterBody2D
 
 
-@export_node_path("CharacterBody2D") var user
+@export_node_path("CharacterBody2D") var target
 
-@onready var player : CharacterBody2D = get_node(user)
-@onready var follow: PathFollow2D = $PathFollow2D
-@onready var tracker_delay: Timer = $TrackerDelay
+const DASH_SPEED = 250.0
+const SPEED = 150.0
+const JUMP_VELOCITY = -250.0
+const DISTANCE_THRESHOLD = 200.0
 
-var tracking : bool = false
+@onready var player : CharacterBody2D = get_node(target)
+@onready var RNG := RandomNumberGenerator.new()
+
+@onready var navigator: NavigationAgent2D = $Navigator
+@onready var ray_cast: RayCast2D = $RayCast
+@onready var wake_delay: Timer = $WakeDelay
+
+@onready var sprite: AnimatedSprite2D = $Sprite
+@onready var dash_particles: CPUParticles2D = $DashParticles
+
+@onready var kabooie: AnimatedSprite2D = $KABOOIE
+@onready var sfx: Node = $"../Effects"
+
+var dashing = false
+var awake = false
+
 
 func _ready() -> void:
-	tracker_delay.start()
-	pass
+	wake_delay.start()
 
 
 func _process(_delta: float) -> void:
-	if tracking:
-		var tracker = player.global_position
-		curve.add_point(tracker)
+	if not awake:
+		return
+	
+	if velocity.y < 0 and sprite.animation != "jump":
+		sprite.play("jump")
+	
+	if velocity.x > 0:
+		sprite.play("walk")
+		sprite.flip_h = false
+	elif velocity.x < 0:
+		sprite.play("walk")
+		sprite.flip_h = true
+	else:
+		$Sprite.play("idle")
+	
+	if dashing:
+		$Sprite.play("dash")
 
 
-func _on_tracker_delay_timeout() -> void:
-	curve.clear_points()
-	curve.add_point(global_position)
-	tracking = true
+func _physics_process(delta: float) -> void:
+	velocity += get_gravity() * delta
+	move_and_slide()
+	
+	if not awake:
+		return
+	
+	navigator.target_position = player.global_position
+	ray_cast.target_position = Vector2(to_local(player.global_position).x, 0)
+	
+	if !navigator.is_target_reached():
+		var locator = to_local(navigator.get_next_path_position()).normalized()
+		var distance = global_position.distance_to(player.global_position)
+		var direction = global_position.direction_to(player.global_position)
+		velocity.x = locator.x * SPEED
+		
+		if distance >= DISTANCE_THRESHOLD and is_on_floor() and not dashing:
+			dashing = true
+			$DashTime.start()
+		
+		if dashing:
+			velocity.x += locator.x * DASH_SPEED
+		
+		dash_particles.emitting = dashing
+		dash_particles.gravity = -direction * Vector2(980, 0)
+		
+		if global_position.y > get_viewport_rect().size.y:
+			awake = false
+			$WakeDelay.start()
+			return
+		
+	if ray_cast.is_colliding():
+		navigator.target_position = player.global_position
+		
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+
+func _on_dash_time_timeout() -> void:
+	dashing = false
+
+
+func _on_wake_delay_timeout() -> void:
+	global_position = navigator.get_next_path_position()
+	sfx.play("kabooie")
+	kabooie.play("respawn")
+
+
+func _on_kabooie_animation_finished() -> void:
+	if kabooie.animation == "respawn":
+		awake = true
+	kabooie.play("default")

@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://bkpmuchmbfaol"]
 
 [ext_resource type="Script" uid="uid://c2iocajubs8l1" path="res://src/sounds/sound_manager.gd" id="1_neok5"]
-[ext_resource type="AudioStream" uid="uid://lso2edoh74xx" path="res://assets/music/Adventure's Spirit - Title Theme.wav" id="2_dcc0a"]
+[ext_resource type="AudioStream" uid="uid://ljbym5o7cqw2" path="res://assets/sfx/jump-sfx.wav" id="2_btlf5"]
+[ext_resource type="AudioStream" uid="uid://1qks18pl6yas" path="res://assets/music/duplicity - title.mp3" id="2_dcc0a"]
 [ext_resource type="AudioStream" uid="uid://k1be60db6eci" path="res://assets/music/Magic Elderwood Forest - Overworld.wav" id="2_njgy7"]
+[ext_resource type="AudioStream" uid="uid://q2jw570njnco" path="res://assets/sfx/select-sfx.wav" id="2_ntgf3"]
+[ext_resource type="AudioStream" uid="uid://dda7jwhp68c84" path="res://assets/sfx/dash-sfx.wav" id="3_b3aow"]
 [ext_resource type="AudioStream" uid="uid://4j3tguj4yl12" path="res://assets/music/A Great Journey - Overworld.wav" id="3_jcjeo"]
+[ext_resource type="AudioStream" uid="uid://b15n2yef5tidb" path="res://assets/sfx/death-sfx.wav" id="4_pjyie"]
 [ext_resource type="AudioStream" uid="uid://b711dfr3cnim2" path="res://assets/music/A Hollow Darkness - Cave.wav" id="5_q18p3"]
 [ext_resource type="AudioStream" uid="uid://cjaesn255dy5" path="res://assets/music/Secret Passage - Dungeon .wav" id="6_f8udb"]
+[ext_resource type="AudioStream" uid="uid://dlf0sybxlxvu2" path="res://assets/sfx/explosion-sfx.wav" id="6_l1v5k"]
+[ext_resource type="AudioStream" uid="uid://cyu08r0ajflp0" path="res://assets/sfx/activate-ability-sfx.wav" id="7_gjpml"]
+[ext_resource type="AudioStream" uid="uid://clvfy8ey4ddrk" path="res://assets/sfx/deactivate-ability-sfx.wav" id="8_aqt4m"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_710pl"]
 random_pitch = 1.0905077
@@ -22,14 +29,45 @@ stream_1/stream = ExtResource("6_f8udb")
 [node name="SoundManager" type="Node" unique_id=1133291672]
 script = ExtResource("1_neok5")
 
+[node name="Select" type="AudioStreamPlayer" parent="." unique_id=130194991]
+stream = ExtResource("2_ntgf3")
+volume_db = -15.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="." unique_id=1587491395]
+stream = ExtResource("2_btlf5")
+volume_db = -15.0
+
+[node name="Dash" type="AudioStreamPlayer" parent="." unique_id=1268302355]
+stream = ExtResource("3_b3aow")
+volume_db = -5.0
+
+[node name="Death" type="AudioStreamPlayer" parent="." unique_id=256093687]
+stream = ExtResource("4_pjyie")
+volume_db = -15.0
+
+[node name="Kabooie" type="AudioStreamPlayer" parent="." unique_id=340081092]
+stream = ExtResource("6_l1v5k")
+volume_db = -15.0
+
+[node name="ActiveAbility" type="AudioStreamPlayer" parent="." unique_id=1308932365]
+stream = ExtResource("7_gjpml")
+volume_db = -15.0
+
+[node name="InactiveAbility" type="AudioStreamPlayer" parent="." unique_id=1106190427]
+stream = ExtResource("8_aqt4m")
+volume_db = -15.0
+
 [node name="TitleMusic" type="AudioStreamPlayer" parent="." unique_id=1873110657]
 stream = ExtResource("2_dcc0a")
+volume_db = -5.0
 
 [node name="ForestMusic" type="AudioStreamPlayer" parent="." unique_id=2057926158]
 stream = SubResource("AudioStreamRandomizer_710pl")
+volume_db = -5.0
 
 [node name="CaveMusic" type="AudioStreamPlayer" parent="." unique_id=1034944221]
 stream = SubResource("AudioStreamRandomizer_lbunj")
+volume_db = -5.0
 
 [node name="MusicDelay" type="Timer" parent="." unique_id=888036393]
 one_shot = true

@@ -2,6 +2,15 @@ extends Node
 
 signal silenced
 
+
+@onready var select: AudioStreamPlayer = $Select
+@onready var jump: AudioStreamPlayer = $Jump
+@onready var dash: AudioStreamPlayer = $Dash
+@onready var death: AudioStreamPlayer = $Death
+@onready var kabooie: AudioStreamPlayer = $Kabooie
+@onready var active_ability: AudioStreamPlayer = $ActiveAbility
+@onready var inactive_ability: AudioStreamPlayer = $InactiveAbility
+
 @onready var title_music: AudioStreamPlayer = $TitleMusic
 @onready var forest_music: AudioStreamPlayer = $ForestMusic
 @onready var cave_music: AudioStreamPlayer = $CaveMusic

@@ -250,9 +250,7 @@ scale_amount_curve = SubResource("Curve_o822w")
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_710pl")
-animation = &"dash"
-frame = 3
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=959794742]
 position = Vector2(-0.5, 9.639998)
@@ -296,11 +294,6 @@ one_shot = true
 
 [node name="ClimbLimit" type="Timer" parent="." unique_id=1439398230]
 wait_time = 11.0
-one_shot = true
-
-[node name="JumpTimer" type="Timer" parent="." unique_id=1431196285]
-process_callback = 0
-wait_time = 0.2
 one_shot = true
 
 [connection signal="body_entered" from="Climbbox" to="." method="_on_climbbox_body_entered"]

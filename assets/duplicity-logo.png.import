@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bewn78ctik6a7"
-path="res://.godot/imported/crystalcave_1.png-98cc6b13ab21b33c6449caded40b6ae1.ctex"
+uid="uid://b2y8mo3niieky"
+path="res://.godot/imported/duplicity-logo.png-0f5a9ca650c999c40f87261b909f38f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crystal cave/crystalcave_1.png"
-dest_files=["res://.godot/imported/crystalcave_1.png-98cc6b13ab21b33c6449caded40b6ae1.ctex"]
+source_file="res://assets/duplicity-logo.png"
+dest_files=["res://.godot/imported/duplicity-logo.png-0f5a9ca650c999c40f87261b909f38f6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhd2e62rhnl8k"
-path="res://.godot/imported/crystalcave_6.png-42a441dda2ae3edb42f4ae67ee4634e1.ctex"
+uid="uid://bv7xkr4u3eu3q"
+path="res://.godot/imported/crystalmid.png-948a2cb56b03f30a9e1aefdc006f90c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crystal cave/crystalcave_6.png"
-dest_files=["res://.godot/imported/crystalcave_6.png-42a441dda2ae3edb42f4ae67ee4634e1.ctex"]
+source_file="res://assets/crystal_cave/crystalmid.png"
+dest_files=["res://.godot/imported/crystalmid.png-948a2cb56b03f30a9e1aefdc006f90c0.ctex"]
 
 [params]
 

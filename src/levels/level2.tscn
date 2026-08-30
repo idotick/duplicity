@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://die10rxtp0jdp"]
 
-[ext_resource type="Script" uid="uid://crv4s8c8qispj" path="res://src/levels/game.gd" id="1_ovyr1"]
+[ext_resource type="Script" uid="uid://db0oecfpwyiot" path="res://src/levels/level.gd" id="1_ovyr1"]
 [ext_resource type="Texture2D" uid="uid://bs7jtu4efwfep" path="res://assets/forest/forest_0.png" id="2_k2dq7"]
 [ext_resource type="Texture2D" uid="uid://sd3t6lr2w3f0" path="res://assets/forest/forest_1.png" id="3_84a2j"]
 [ext_resource type="Texture2D" uid="uid://cuv06hm8js2i3" path="res://assets/forest/forest_2.png" id="4_hxa2t"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ija21qcahu6x" path="res://assets/tiles/dirt_actual.png" id="6_hpdwy"]
 [ext_resource type="PackedScene" uid="uid://1wxw1rh37x1g" path="res://src/player/player.tscn" id="7_uil34"]
 [ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/screens/winArea.tscn" id="8_0igpg"]
-[ext_resource type="PackedScene" uid="uid://cotsfboh8lo78" path="res://src/antiplayer/antiplayer.tscn" id="9_qi72p"]
+[ext_resource type="PackedScene" uid="uid://bkpmuchmbfaol" path="res://src/sounds/sound_manager.tscn" id="10_k2dq7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aehps"]
 texture = ExtResource("6_hpdwy")
@@ -209,15 +209,6 @@ texture_filter = 1
 texture = ExtResource("5_f08ra")
 centered = false
 
-[node name="PlayerCamera" type="Camera2D" parent="." unique_id=232592826]
-position = Vector2(64, 566)
-ignore_rotation = false
-zoom = Vector2(1.5, 1.5)
-limit_left = 0
-limit_right = 2556
-limit_bottom = 720
-position_smoothing_enabled = true
-
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=279261208]
 texture_filter = 1
 scale = Vector2(3, 3)
@@ -234,6 +225,15 @@ tile_map_data = PackedByteArray("AAAXABwAAQACAAEAAAAXAB0AAQACAAEAAAAYAB0AAQACAAE
 tile_set = SubResource("TileSet_710pl")
 collision_enabled = false
 
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=232592826]
+position = Vector2(64, 566)
+ignore_rotation = false
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_right = 2556
+limit_bottom = 720
+position_smoothing_enabled = true
+
 [node name="Player" parent="." unique_id=1896544933 instance=ExtResource("7_uil34")]
 position = Vector2(32, 194)
 camera = NodePath("../PlayerCamera")
@@ -242,8 +242,7 @@ camera = NodePath("../PlayerCamera")
 position = Vector2(2547, 91)
 collision_layer = 2
 
-[node name="Antiplayer" parent="." unique_id=101660933 instance=ExtResource("9_qi72p")]
-user = NodePath("../Player")
+[node name="Effects" parent="." unique_id=1133291672 instance=ExtResource("10_k2dq7")]
 
 [connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="body_entered" from="winArea" to="." method="_on_body_entered"]

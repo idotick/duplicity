@@ -40,7 +40,7 @@ layout_mode = 1
 [node name="Camera" type="Camera2D" parent="Screen" unique_id=182374655]
 use_parent_material = true
 offset = Vector2(640, 360)
-limit_bottom = 720
+limit_bottom = 800
 
 [node name="Canvas" type="CanvasLayer" parent="Screen/Camera" unique_id=2016778143]
 
@@ -53,6 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Screen/Camera/Canvas/Overlays" unique_id=672477593]
+visible = false
 material = SubResource("ShaderMaterial_jxb28")
 layout_mode = 1
 anchors_preset = 15

@@ -4,12 +4,14 @@ signal paused
 signal playing
 signal lose
 
-@onready var camera: Camera2D = $PlayerCamera
+@onready var camera: Camera2D
 
 var is_paused : bool = false
 
 
 func _ready() -> void:
+	await get_child(0).ready
+	camera = get_child(0).level_cam
 	name = "Game"
 
 
@@ -19,7 +21,7 @@ func _process(_delta: float) -> void:
 
 func pause() -> void:
 	if not is_paused:
-		camera.enabled = false
+		#camera.enabled = false
 		is_paused = true
 	
 	paused.emit()
@@ -27,7 +29,7 @@ func pause() -> void:
 
 func play() -> void:
 	if is_paused:
-		camera.enabled = true
+		#camera.enabled = true
 		is_paused = false
 	
 	playing.emit()
@@ -35,7 +37,3 @@ func play() -> void:
 
 func _on_player_death() -> void:
 	lose.emit()
-
-
-func _on_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.

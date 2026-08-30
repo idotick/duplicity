@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3jtfycyuylb3"
-path="res://.godot/imported/crystalcave_7.png-b2921ccaf7141d3d9f4e65d6bce75221.ctex"
+uid="uid://cubuks58ljgt5"
+path="res://.godot/imported/crystalspikes.png-f230a03d8183fc5afde6469dd7170345.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crystal cave/crystalcave_7.png"
-dest_files=["res://.godot/imported/crystalcave_7.png-b2921ccaf7141d3d9f4e65d6bce75221.ctex"]
+source_file="res://assets/cave_tiles/crystalspikes.png"
+dest_files=["res://.godot/imported/crystalspikes.png-f230a03d8183fc5afde6469dd7170345.ctex"]
 
 [params]
 

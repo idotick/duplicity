@@ -7,7 +7,7 @@ signal death
 const DASH_SPEED = 300.0
 const SPEED = 250.0
 const JUMP_VELOCITY = -55.0
-const PEAK_JUMP_TICK = 6
+const PEAK_JUMP_TICK = 8
 
 @export var gravity_multipler = 2.0
 

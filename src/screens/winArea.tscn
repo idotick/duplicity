@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://lnuenvup01jk"]
+
+[ext_resource type="Script" uid="uid://dv0bs2xwmwvcf" path="res://src/screens/win_area.gd" id="1_x8kn6"]
+[ext_resource type="PackedScene" uid="uid://c0r70tmn25ijd" path="res://src/screens/menus/win.tscn" id="2_7o03a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6el8h"]
+size = Vector2(100, 300)
+
+[node name="winArea" type="Area2D" unique_id=1523791256]
+script = ExtResource("1_x8kn6")
+win_screen_scene = ExtResource("2_7o03a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=205104635]
+shape = SubResource("RectangleShape2D_6el8h")

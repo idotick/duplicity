@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://c4pel0agx7igs"]
 
 [ext_resource type="Script" uid="uid://b2tg5krcc0v1y" path="res://src/screens/main.gd" id="1_ode7r"]
+[ext_resource type="Shader" uid="uid://b50xmwvd68aac" path="res://src/screens/main.gdshader" id="1_xgsyd"]
 [ext_resource type="PackedScene" uid="uid://bkpmuchmbfaol" path="res://src/sounds/sound_manager.tscn" id="2_fav7m"]
 [ext_resource type="PackedScene" uid="uid://cqe5dwrylo6gw" path="res://src/screens/menus/title.tscn" id="2_xgsyd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxb28"]
+shader = ExtResource("1_xgsyd")
+shader_parameter/aspect = 0.5
+shader_parameter/distortion = 1.0
+shader_parameter/radius = 1.07
+shader_parameter/alpha = 1.0
+shader_parameter/crop = 0.943
+shader_parameter/crop_color = Color(0, 0, 0, 1)
+shader_parameter/crop_feathering = 0.1
+shader_parameter/channel_offset = 0.005
+shader_parameter/noise_strength = 20.0
 
 [node name="Main" type="Control" unique_id=2065825284]
 layout_mode = 3
@@ -25,11 +38,29 @@ grow_vertical = 2
 layout_mode = 1
 
 [node name="Camera" type="Camera2D" parent="Screen" unique_id=182374655]
+use_parent_material = true
 offset = Vector2(640, 360)
 limit_bottom = 720
 
 [node name="Canvas" type="CanvasLayer" parent="Screen/Camera" unique_id=2016778143]
 
-[node name="SoundManager" parent="." unique_id=1133291672 instance=ExtResource("2_fav7m")]
+[node name="Overlays" type="Control" parent="Screen/Camera/Canvas" unique_id=667465222]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Screen/Camera/Canvas/Overlays" unique_id=672477593]
+material = SubResource("ShaderMaterial_jxb28")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Music" parent="." unique_id=1133291672 instance=ExtResource("2_fav7m")]
 
 [connection signal="game_start" from="Screen/Title" to="." method="_on_game_start"]

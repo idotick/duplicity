@@ -73,10 +73,6 @@ func _process(_delta: float) -> void:
 		paused = !paused
 		check_state()
 	
-	#if Input.is_action_just_pressed("restart"):
-		#restarting = true
-		#check_state()
-	
 	if buffering:
 		check_state()
 	

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bhwxqkhikpn61" path="res://assets/forest/forest_3.png" id="5_f08ra"]
 [ext_resource type="Texture2D" uid="uid://ija21qcahu6x" path="res://assets/tiles/dirt_actual.png" id="6_hpdwy"]
 [ext_resource type="PackedScene" uid="uid://1wxw1rh37x1g" path="res://src/player/player.tscn" id="7_uil34"]
-[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/screens/winArea.tscn" id="8_0igpg"]
+[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/win_area/winArea.tscn" id="8_0igpg"]
 [ext_resource type="PackedScene" uid="uid://bkpmuchmbfaol" path="res://src/sounds/sound_manager.tscn" id="10_k2dq7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aehps"]

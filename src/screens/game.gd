@@ -96,7 +96,6 @@ func _change_level(level: int) -> void:
 
 
 func _add_level_index(n: int) -> void:
-	#print(n)
 	current_stage += n
 	_change_level(current_stage)
 

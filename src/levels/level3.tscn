@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://nk1x61yegac4" path="res://assets/cave_tiles/lilcrystals.png" id="12_f4emq"]
 [ext_resource type="Texture2D" uid="uid://cubuks58ljgt5" path="res://assets/cave_tiles/crystalspikes.png" id="13_t31p4"]
 [ext_resource type="Texture2D" uid="uid://div3202nfl20c" path="res://assets/cave_tiles/crystals.png" id="14_opi8r"]
-[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/screens/winArea.tscn" id="17_3ac47"]
+[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/win_area/winArea.tscn" id="17_3ac47"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_710pl"]
 vertices = PackedVector2Array(2036.5234, 123, 2104.8672, 42.351563, 2638.8125, 38.171875, 2615.4063, 265.29688, 2523.3984, 297.42188, 2422.6094, 310.14063, 2327.3281, 321.6172, 1207.8516, 25.0625, 2107.3203, 27.921875, 1699.0703, 123, 1338.3984, 670.03125, 1203.8594, 576, 1548.1484, 509.0703, 101.78125, 595.6875, -36.109375, 645.21875, -39.867188, 27.078125, 648, 29.90625, 425.53125, 342, 2037.8594, 579.52344, 2005.5078, 658.1875, 1970.6328, 658.7031, 1969.6406, 603.8203, 2013.8516, 534.3594, 418.53906, 600.6797, 99.78125, 646.77344, 541.1797, 342, 648, 576, 538.1797, 669.1406, 1192.8906, 673.9922, 2128.4219, 392.4922, 2144.0625, 481.1172, 2081.4766, 496.77344, 1716.8281, 513.71875, 1930, 604.1797, 1930, 660.0078, 1878.2109, 665.53906, 1742.2109, 605.09375, 1644.4766, 513.35156, 2303.4531, 388.46094, 2260.3984, 383.9297, 1594.4922, 488.9922, 1497.3281, 648.78125)

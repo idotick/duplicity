@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bhwxqkhikpn61" path="res://assets/forest/forest_3.png" id="5_vm2gj"]
 [ext_resource type="Texture2D" uid="uid://ija21qcahu6x" path="res://assets/tiles/dirt_actual.png" id="6_ql4hq"]
 [ext_resource type="PackedScene" uid="uid://1wxw1rh37x1g" path="res://src/player/player.tscn" id="7_5lu3u"]
-[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/screens/winArea.tscn" id="8_juu1d"]
+[ext_resource type="PackedScene" uid="uid://lnuenvup01jk" path="res://src/win_area/winArea.tscn" id="8_juu1d"]
 [ext_resource type="PackedScene" uid="uid://bkpmuchmbfaol" path="res://src/sounds/sound_manager.tscn" id="9_juu1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aehps"]
@@ -241,7 +241,6 @@ camera = NodePath("../PlayerCamera")
 [node name="winArea" parent="." unique_id=1523791256 instance=ExtResource("8_juu1d")]
 position = Vector2(2612, 90)
 collision_layer = 2
-collision_mask = 2
 
 [node name="Effects" parent="." unique_id=1133291672 instance=ExtResource("9_juu1d")]
 

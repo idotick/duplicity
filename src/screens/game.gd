@@ -9,7 +9,7 @@ signal win
 @onready var camera: Camera2D
 
 var is_paused : bool = false
-var current_stage : int = 3
+var current_stage : int = 1
 
 
 func handle_end() -> void:
@@ -71,6 +71,7 @@ func _on_player_death() -> void:
 
 
 func _on_level_play(title: String) -> void:
+	sound_manager.stop_all()
 	sound_manager.play(title)
 
 

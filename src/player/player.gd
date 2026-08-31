@@ -90,14 +90,14 @@ func handle_jumping() -> void:
 		velocity.y /= 2
 
 
-func handle_climbing(gravity: Vector2) -> void:
+func handle_climbing(_gravity: Vector2) -> void:
 	if Input.is_action_just_pressed("climb"):
 		climb_limit.start()
 	
 	if Input.is_action_pressed("climb") and can_climb \
 		and (not jumping or not $ClimbBuffer.is_stopped()) and not dashing:
 		$ClimbBuffer.start()
-		gravity = Vector2.ZERO
+		_gravity = Vector2.ZERO
 		velocity.y = 0
 		if Input.is_action_pressed("jump"):
 			climbing = true

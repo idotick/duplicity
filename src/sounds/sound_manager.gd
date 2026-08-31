@@ -81,9 +81,15 @@ func change_volume(key: String, lin: float, duration: float) -> void:
 	tween.tween_property(sound, "volume_db", linear_to_db(lin), duration)
 
 
+func stop_all() -> void:
+	for sound in is_playing:
+		sound.stop()
+
+
 func override(key: String):
 	if is_playing.size() <= 0:
 		return
+	
 	var temp = is_playing[0]
 	if key != "":
 		temp = get(key)

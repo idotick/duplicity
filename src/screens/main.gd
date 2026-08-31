@@ -179,5 +179,8 @@ func _on_level_buffer_timeout() -> void:
 	
 	if win:
 		buffer_end.emit(1)
-	else:
+	if lose:
 		buffer_end.emit(0)
+	
+	win = false
+	lose = false

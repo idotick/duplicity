@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q2rmb8k174bu"
-path="res://.godot/imported/stone.png-48dc0d8a1b6f14ca82d4b805b0979a6f.ctex"
+uid="uid://p667ugf7e1gn"
+path="res://.godot/imported/thorns.png-b6230578093ff04e3e21f6e4b86d7185.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cave_tiles/stone.png"
-dest_files=["res://.godot/imported/stone.png-48dc0d8a1b6f14ca82d4b805b0979a6f.ctex"]
+source_file="res://assets/tiles/thorns.png"
+dest_files=["res://.godot/imported/thorns.png-b6230578093ff04e3e21f6e4b86d7185.ctex"]
 
 [params]
 

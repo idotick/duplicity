@@ -68,6 +68,13 @@ volume_db = -5.0
 [node name="MusicDelay" type="Timer" parent="." unique_id=888036393]
 one_shot = true
 
+[connection signal="finished" from="Select" to="." method="on_sfx_finished"]
+[connection signal="finished" from="Jump" to="." method="on_sfx_finished"]
+[connection signal="finished" from="Dash" to="." method="on_sfx_finished"]
+[connection signal="finished" from="Death" to="." method="on_sfx_finished"]
+[connection signal="finished" from="Kabooie" to="." method="on_sfx_finished"]
+[connection signal="finished" from="ActiveAbility" to="." method="on_sfx_finished"]
+[connection signal="finished" from="InactiveAbility" to="." method="on_sfx_finished"]
 [connection signal="finished" from="TitleMusic" to="." method="on_music_finished"]
 [connection signal="finished" from="ForestMusic" to="." method="on_music_finished"]
 [connection signal="finished" from="CaveMusic" to="." method="on_music_finished"]

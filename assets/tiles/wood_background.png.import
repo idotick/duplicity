@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nk1x61yegac4"
-path="res://.godot/imported/lilcrystals.png-f520ec02871aedb013ac0ad6a3b4484c.ctex"
+uid="uid://cdxmolve7kvko"
+path="res://.godot/imported/wood_background.png-4d07e6b52b12729bfcd0f90881009a7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cave_tiles/lilcrystals.png"
-dest_files=["res://.godot/imported/lilcrystals.png-f520ec02871aedb013ac0ad6a3b4484c.ctex"]
+source_file="res://assets/tiles/wood_background.png"
+dest_files=["res://.godot/imported/wood_background.png-4d07e6b52b12729bfcd0f90881009a7b.ctex"]
 
 [params]
 

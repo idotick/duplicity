@@ -97,12 +97,18 @@ func override(key: String):
 		child.stop()
 
 
+func on_sfx_finished() -> void:
+	for sound in is_playing:
+		if !sound.name.ends_with("Music") and not sound.playing:
+			is_playing.erase(sound)
+
+
 func on_music_finished() -> void:
 	RNG.randomize()
 	
-	for music in is_playing:
-		if not music.playing:
-			to_replay = music
+	for sound in is_playing:
+		if sound.name.ends_with("Music") and not sound.playing:
+			to_replay = sound
 	
 	music_delay.wait_time = RNG.randi_range(3, 10)
 	music_delay.start()

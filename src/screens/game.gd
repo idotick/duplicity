@@ -9,7 +9,7 @@ signal win
 @onready var camera: Camera2D
 
 var is_paused : bool = false
-var current_stage : int = 1
+var current_stage : int = 3
 
 
 func handle_end() -> void:

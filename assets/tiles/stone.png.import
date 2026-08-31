@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://div3202nfl20c"
-path="res://.godot/imported/crystals.png-d9a321ebd679207c0a040f42627ce050.ctex"
+uid="uid://q2rmb8k174bu"
+path="res://.godot/imported/stone.png-a62a9bfa37f7b92c70831e50c465efad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cave_tiles/crystals.png"
-dest_files=["res://.godot/imported/crystals.png-d9a321ebd679207c0a040f42627ce050.ctex"]
+source_file="res://assets/tiles/stone.png"
+dest_files=["res://.godot/imported/stone.png-a62a9bfa37f7b92c70831e50c465efad.ctex"]
 
 [params]
 

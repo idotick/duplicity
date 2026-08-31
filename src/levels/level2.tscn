@@ -229,7 +229,7 @@ collision_enabled = false
 position = Vector2(64, 566)
 ignore_rotation = false
 zoom = Vector2(1.5, 1.5)
-limit_left = 0
+limit_left = -150
 limit_right = 2556
 limit_bottom = 720
 position_smoothing_enabled = true
@@ -240,7 +240,6 @@ camera = NodePath("../PlayerCamera")
 
 [node name="winArea" parent="." unique_id=1523791256 instance=ExtResource("8_0igpg")]
 position = Vector2(2547, 91)
-collision_layer = 2
 
 [node name="Effects" parent="." unique_id=1133291672 instance=ExtResource("10_k2dq7")]
 

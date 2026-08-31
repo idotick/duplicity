@@ -31,7 +31,22 @@ func play(key: String) -> void:
 		print("Recheck if " + key + " is the right sound key.")
 
 
+func get_current_volume_db(key: String) -> float:
+	if is_playing.size() <= 0:
+		return 0.0
+	
+	var temp = is_playing[0]
+	if key != "":
+		temp = get(key)
+	
+	var sound : AudioStreamPlayer = temp
+	return sound.volume_db
+
+
 func fade_out(key: String, duration: float) -> void:
+	if is_playing.size() <= 0:
+		return
+	
 	var temp = is_playing[0]
 	if key != "":
 		temp = get(key)
@@ -39,18 +54,23 @@ func fade_out(key: String, duration: float) -> void:
 	var sound : AudioStreamPlayer = temp
 	var tween : Tween = create_tween()
 	
+	var orig_volume_db = get_current_volume_db(key)
+	
 	tween.tween_property(sound, "volume_db", linear_to_db(0.001), duration)
 	
 	await tween.finished
 	
 	sound.stop()
-	sound.volume_db = 0
+	sound.volume_db = orig_volume_db
 	is_playing.erase(sound)
 	
 	silenced.emit()
 
 
 func change_volume(key: String, lin: float, duration: float) -> void:
+	if is_playing.size() <= 0:
+		return
+	
 	var temp = is_playing[0]
 	if key != "":
 		temp = get(key)
@@ -59,6 +79,22 @@ func change_volume(key: String, lin: float, duration: float) -> void:
 	var tween : Tween = create_tween()
 	
 	tween.tween_property(sound, "volume_db", linear_to_db(lin), duration)
+
+
+func override(key: String):
+	if is_playing.size() <= 0:
+		return
+	var temp = is_playing[0]
+	if key != "":
+		temp = get(key)
+	
+	var sound : AudioStreamPlayer = temp
+	for child in get_children():
+		if child.name == sound.name:
+			if not sound.playing:
+				sound.play()
+			continue
+		child.stop()
 
 
 func on_music_finished() -> void:

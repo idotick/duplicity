@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export_node_path("CharacterBody2D") var target
 
 const DASH_SPEED = 250.0
-const SPEED = 150.0
+const SPEED = 250.0
 const JUMP_VELOCITY = -250.0
 const DISTANCE_THRESHOLD = 200.0
 
@@ -50,19 +50,16 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity += get_gravity() * delta
-	move_and_slide()
-	
 	if not awake:
 		return
 	
 	navigator.target_position = player.global_position
 	ray_cast.target_position = Vector2(to_local(player.global_position).x, 0)
 	
+	var direction = global_position.direction_to(player.global_position)
 	if !navigator.is_target_reached():
 		var locator = to_local(navigator.get_next_path_position()).normalized()
 		var distance = global_position.distance_to(player.global_position)
-		var direction = global_position.direction_to(player.global_position)
 		velocity.x = locator.x * SPEED
 		
 		if distance >= DISTANCE_THRESHOLD and is_on_floor() and not dashing:
@@ -83,8 +80,12 @@ func _physics_process(delta: float) -> void:
 	if ray_cast.is_colliding():
 		navigator.target_position = player.global_position
 		
-		if is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		if direction.y < 0:
 			velocity.y = JUMP_VELOCITY
+	
+	velocity += get_gravity() * delta
+	move_and_slide()
 
 
 func _on_dash_time_timeout() -> void:
@@ -92,6 +93,7 @@ func _on_dash_time_timeout() -> void:
 
 
 func _on_wake_delay_timeout() -> void:
+	velocity = Vector2.ZERO
 	global_position = navigator.get_next_path_position()
 	sfx.play("kabooie")
 	kabooie.play("respawn")

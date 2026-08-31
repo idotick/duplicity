@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://l4i8jrdugs5f"]
+[gd_scene format=3 uid="uid://cqj121iuqpbr1"]
 
 [ext_resource type="Script" uid="uid://crv4s8c8qispj" path="res://src/screens/game.gd" id="1_ox7v8"]
-[ext_resource type="PackedScene" uid="uid://l4i8jrdugs5f" path="res://src/levels/level1.tscn" id="2_5y5ys"]
 
-[node name="Game" type="Control" unique_id=2105574819]
+[node name="Game" type="Control" unique_id=1928366580]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,5 +11,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ox7v8")
 
-[node name="Level 1" parent="." unique_id=1612395587 instance=ExtResource("2_5y5ys")]
-layout_mode = 1
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_order_changed" from="." to="." method="_on_child_order_changed"]

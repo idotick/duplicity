@@ -39,6 +39,12 @@ var can_climb : bool = false
 var tired : bool = false
 
 
+func kill() -> void:
+	sfx.play("death")
+	death.emit()
+	queue_free()
+
+
 func _process(_delta: float) -> void:
 	RNG.randomize()
 	
@@ -51,6 +57,7 @@ func _process(_delta: float) -> void:
 		$Sprite.play("walk")
 	elif jumping and not is_on_floor():
 		$Sprite.play("jump")
+		$ClimbBuffer.start()
 	else:
 		if not rest_timer.is_stopped():
 			$Sprite.play("idle")
@@ -87,7 +94,9 @@ func handle_climbing(gravity: Vector2) -> void:
 	if Input.is_action_just_pressed("climb"):
 		climb_limit.start()
 	
-	if Input.is_action_pressed("climb") and can_climb:
+	if Input.is_action_pressed("climb") and can_climb \
+		and (not jumping or not $ClimbBuffer.is_stopped()) and not dashing:
+		$ClimbBuffer.start()
 		gravity = Vector2.ZERO
 		velocity.y = 0
 		if Input.is_action_pressed("jump"):
@@ -173,6 +182,10 @@ func _physics_process(delta: float) -> void:
 	if abs(velocity) > Vector2.ZERO:
 		cam.global_position = lerp(cam.global_position, global_position, 0.2)
 	
+	if global_position.y > $"../PlayerCamera".limit_bottom:
+		kill()
+		await get_tree().process_frame
+	
 	move_and_slide()
 	
 	if is_on_floor() != was_on_floor:
@@ -191,10 +204,9 @@ func _on_dash_time_timeout() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.name == "Hitbox":
-		sfx.play("death")
-		death.emit()
-		queue_free()
+		kill()
 		area.owner.queue_free()
+		await get_tree().process_frame
 
 
 func _on_rest_timer_timeout() -> void:

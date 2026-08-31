@@ -293,7 +293,12 @@ one_shot = true
 one_shot = true
 
 [node name="ClimbLimit" type="Timer" parent="." unique_id=1439398230]
+process_callback = 0
 wait_time = 11.0
+one_shot = true
+
+[node name="ClimbBuffer" type="Timer" parent="." unique_id=1108780218]
+process_callback = 0
 one_shot = true
 
 [connection signal="body_entered" from="Climbbox" to="." method="_on_climbbox_body_entered"]

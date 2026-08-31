@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bpum5ovd5vuah" path="res://assets/ui/epiccave.png" id="2_nssab"]
 [ext_resource type="Texture2D" uid="uid://cksmiswh4cias" path="res://assets/ui/duplicitytitle.png" id="3_d3383"]
 [ext_resource type="Script" uid="uid://u3u8sjn6y43a" path="res://src/screens/menus/text.gd" id="4_1x81q"]
+[ext_resource type="FontFile" uid="uid://ddskwgpapmt74" path="res://assets/ui/Minecraft.ttf" id="5_d3383"]
 
 [node name="Title" type="Control" unique_id=1058211172]
 layout_mode = 3
@@ -20,8 +21,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.563385
-offset_bottom = 0.5633545
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_nssab")
@@ -44,3 +43,24 @@ grow_vertical = 2
 offset_transform_enabled = true
 texture = ExtResource("3_d3383")
 script = ExtResource("4_1x81q")
+
+[node name="Label" type="Label" parent="." unique_id=223610557]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.5
+offset_top = -23.0
+offset_right = 50.5
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -4)
+theme_override_fonts/font = ExtResource("5_d3383")
+theme_override_font_sizes/font_size = 35
+text = "PRESS ENTER"
+horizontal_alignment = 1
+vertical_alignment = 1
